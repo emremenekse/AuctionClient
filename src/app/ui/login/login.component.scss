@@ -1,0 +1,9 @@
+.example-container {
+  display: flex; /* Flex container olarak ayarlar */
+  flex-direction: column; /* Öğeleri dikey sütun olarak hizalar */
+  justify-content: center; /* Dikey olarak ortalar */
+  align-items: center; /* Yatay olarak ortalar */
+  height: 100vh; /* Ekrana göre tam yükseklik */
+  text-align: center; /* Metni ortalar, gerekiyorsa */
+}
+

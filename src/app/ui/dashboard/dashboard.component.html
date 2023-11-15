@@ -1,0 +1,36 @@
+<div class="right-align">
+  <button mat-mini-fab (click)=" goToProfile()" aria-label="Example icon button with a home icon">
+    <mat-icon>home</mat-icon>
+  </button>
+</div>
+<br>
+<mat-grid-list cols="1" rowHeight="50px">
+  <mat-grid-tile *ngFor="let organization of organizations">
+    <mat-card [class.disabled]="!organization.isActive" (click)="organization.isActive && 
+    goToDetails(organization.name)">
+      {{ organization.name }}
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<br>
+<div *ngIf="showButton" class="right-align">
+  <div>
+    <mat-form-field>
+      <mat-label>Organization Name</mat-label>
+      <input matInput #txtOrganizationName>
+    </mat-form-field>
+  </div>
+  <br>
+  <div>
+    <mat-form-field>
+      <mat-label>Admin UserName</mat-label>
+      <input matInput #txtAdminUsername>
+    </mat-form-field>
+  </div>
+  <br>
+  <div><button mat-mini-fab (click)="createOrganization(txtOrganizationName,txtAdminUsername)" color="accent"
+      aria-label="Example icon button with a plus one icon">
+      <mat-icon>plus_one</mat-icon>
+    </button>
+  </div>
+</div>

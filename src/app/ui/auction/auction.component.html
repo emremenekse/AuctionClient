@@ -1,0 +1,49 @@
+<mat-toolbar color="primary" class="centered-toolbar">
+  All Auctions
+</mat-toolbar>
+<router-outlet></router-outlet>
+
+<mat-grid-list cols="1" rowHeight="50px">
+  <mat-grid-tile *ngFor="let auction of auctions">
+    <mat-card [class.disabled]="auction.isCompleted" (click)=" !auction.isCompleted &&
+      goToAuctionDetail(auction.auctionName)">
+      {{ auction.auctionName }}
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<div *ngIf="showButton" class="right-align">
+  <div>
+    <mat-form-field>
+      <mat-label>Product Name</mat-label>
+      <input matInput #txtProductName>
+    </mat-form-field>
+  </div>
+  <br>
+  <div>
+    <mat-form-field>
+      <mat-label>Provider Username</mat-label>
+      <input matInput #txtproviderUserName>
+    </mat-form-field>
+  </div>
+  <br>
+  <div>
+    <mat-form-field>
+      <mat-label>Auction Name</mat-label>
+      <input matInput #txtAuctionName>
+    </mat-form-field>
+  </div>
+  <br>
+  <div>
+    <mat-form-field>
+      <mat-label>Start Price</mat-label>
+      <input matInput #txtStartPrice>
+    </mat-form-field>
+  </div>
+  <br>
+  <br>
+  <div><button mat-mini-fab (click)="createAuction(txtProductName,txtproviderUserName,txtAuctionName,txtStartPrice)"
+      color="accent" aria-label="Example icon button with a plus one icon">
+      <mat-icon>plus_one</mat-icon>
+    </button>
+  </div>
+</div>

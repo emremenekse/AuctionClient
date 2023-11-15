@@ -1,0 +1,44 @@
+
+.mat-grid-tile {
+  display: flex;
+  align-items: center; /* Dikey olarak ortala */
+  justify-content: center; /* Yatay olarak ortala */
+  border: 1px solid #ccc;
+  background: lightblue;
+  cursor: pointer;
+  font-size: 0.8em;
+}
+
+.mat-grid-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; /* Öğeler arasında eşit boşluk bırakarak dikey olarak ortala */
+}
+
+.mat-card {
+  cursor: pointer; /* Kartın tıklanabilir olduğunu belirtir */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Card'ın grid hücresini doldurmasını sağlar */
+}
+
+
+ .example-container {
+  display: flex; /* Flex container olarak ayarlar */
+  flex-direction: column; /* Öğeleri dikey sütun olarak hizalar */
+  justify-content: center; /* Dikey olarak ortalar */
+  align-items: center; /* Yatay olarak ortalar */
+  height: 100vh; /* Ekrana göre tam yükseklik */
+  text-align: center; /* Metni ortalar, gerekiyorsa */
+}
+.right-align {
+  display: flex;
+  justify-content: center;
+}
+
+mat-card.disabled {
+  color: rgba(0, 0, 0, 0.38); /* Gri tonuna çevirerek etkisiz hale getirin */
+  pointer-events: none; /* Tıklamayı etkisiz hale getirin */
+  cursor: default; /* İmleci varsayılana çevirin */
+}

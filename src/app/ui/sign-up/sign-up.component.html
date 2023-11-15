@@ -1,0 +1,41 @@
+<div class="example-container">
+  <mat-form-field>
+    <mat-label>FirstName</mat-label>
+    <input matInput #txtFirstname>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>LastName</mat-label>
+    <input matInput #txtLastname>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput #txtUsername>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput #txtEmail>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Phone Number</mat-label>
+    <input matInput #txtPhoneNumber>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput #txtNewPassword [type]="hide ? 'password' : 'text'">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide">
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </button>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color="primary"
+    (click)="createuserfirst(txtFirstname,txtLastname,txtUsername,txtEmail,txtPhoneNumber,txtNewPassword)">Create New
+    User
+  </button>
+  <br>
+</div>
