@@ -4,9 +4,12 @@ export class AuctionEntity {
   productName?: string;
   providerUserName?: string;
   auctionName?: string;
-  lastPrice?: number; // TypeScript'te `decimal` tipi yoktur, bu yüzden `number` kullanılır
+  lastPrice?: number; 
   startTime?: Date;
   endTime?: Date;
   isCompleted?: boolean;
-  winnerUserId?: number; // "?" ile bu alanın isteğe bağlı olduğunu belirtiriz, yani `null` veya `undefined` olabilir
+  winnerUserId?: number;
+  photoBytes?: string;
+  auctionDescription?: string;
+  startPrice?: number;
 }

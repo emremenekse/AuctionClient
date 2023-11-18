@@ -43,7 +43,7 @@ const uiRoutes: Routes = [
     CommonModule,HttpClientModule ,MatToolbarModule,MatCardModule,MatGridListModule,MatButtonModule,MatInputModule,MatDividerModule,MatIconModule,RouterModule.forChild(uiRoutes)
   ],
   exports: [
-    RouterModule  // Böylece UiModule içinde tanımlanan rotalar dışa aktarılır
+    RouterModule  
   ]
   
 })

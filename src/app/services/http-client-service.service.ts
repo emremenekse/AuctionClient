@@ -24,7 +24,7 @@ get<T>(requestParameters: Partial<RequestParameters>, id?: string){
     let queryParams: string[] = [];
     
     if(id){
-      queryParams.push(`id=${encodeURIComponent(id)}`); // id değerini encode edin
+      queryParams.push(`id=${encodeURIComponent(id)}`); 
     }
     if(requestParameters.querystrings){
       queryParams.push(requestParameters.querystrings);

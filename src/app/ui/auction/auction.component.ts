@@ -16,6 +16,7 @@ export class AuctionComponent implements OnInit {
   auctions: any;
   showButton: boolean = false;
   userInfo: any;
+  photoBytes?: string;
   constructor(private alertify: AlertifyService,private authService: AuthService,private router: Router,
     private route: ActivatedRoute, private auctionService: AuctionService) {}
 
@@ -24,46 +25,47 @@ export class AuctionComponent implements OnInit {
       const name = params['name'];
       if (name) {
         this.organizationNameForRequest = name;
-        // Doğru zamanda istek atmak için burada çağır
         this.getAuctionsWithOrganizationName(name);
       }
     });
     this.userInfo = this.authService.getUserData();
       if (this.userInfo) {
-      // userInfo içinde isAdmin özelliğini kontrol et
       this.showButton = this.userInfo.isSeller;
       }
+  }
+  goToProfile(): void {
+      this.router.navigate(['/profile']);
+    }
+
+  goToDashboard(): void {
+    this.router.navigate(['/dashboard']);
   }
   goToAuctionDetail(auctionName: string) {
     this.router.navigate(['/auctionDetail',{ name: auctionName }]);
   }
   createAuction(ProductName: HTMLInputElement , providerUserName: HTMLInputElement,AuctionName: HTMLInputElement
-    ,StartPrice: HTMLInputElement) {
+    ,StartPrice: HTMLInputElement, description: HTMLInputElement) {
       const auction_entity: AuctionEntity = new AuctionEntity();
       auction_entity.productName = ProductName.value;
       auction_entity.providerUserName = providerUserName.value;
       auction_entity.auctionName = AuctionName.value;
       auction_entity.lastPrice = Number(StartPrice.value);
+      auction_entity.photoBytes = this.photoBytes;
+      auction_entity.auctionDescription = description.value;
       this.auctionService.createAuction(auction_entity).subscribe({
   next: (result) => {
-    // Başarılı giriş işlemi
     this.getAuctionsWithOrganizationName("");
   },
   error: (error) => {
-    // Hata mesajını güvenli bir şekilde yakalayıp gösterme
     let errorMessage = "An unexpected error occurred.";
     if (error instanceof HttpErrorResponse) {
-      // Backend hata döndürdü, hata mesajını kontrol et
       errorMessage = error.error.message || "Invalid username or password.";
     } else if (error.error instanceof ErrorEvent) {
-      // Client-side veya network hatası oluştu
       errorMessage = `An error occurred: ${error.error.message}`;
     } else {
-      // Diğer türden bir hata oluştu
       errorMessage = error.message || String(error);
     }
 
-    // Alertify ile hata mesajını göster
     this.alertify.message(errorMessage, {
       dismissOthers: true,
       messageType: MessageType.Error,
@@ -80,4 +82,25 @@ export class AuctionComponent implements OnInit {
       this.auctions = data;
     })
   }
+  handleFileInput(event: Event) {
+  const inputElement = event.target as HTMLInputElement;
+  if (inputElement.files && inputElement.files.length) {
+    const file = inputElement.files.item(0);
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file); 
+      reader.onload = () => {
+        this.photoBytes = reader.result as string; 
+      };
+      reader.onerror = (error) => {
+        console.error('File reading error:', error);
+      };
+    }
+  }
+}
+
+
+
+
+
 }

@@ -3,6 +3,11 @@
     <mat-icon>home</mat-icon>
   </button>
 </div>
+<div class="right-align">
+  <button mat-mini-fab color="primary" (click)=" goToDashboard()" aria-label="Example icon button with a menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+</div>
 <br>
 <mat-grid-list cols="1" rowHeight="50px">
   <mat-grid-tile *ngFor="let organization of organizations">

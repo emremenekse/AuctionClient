@@ -1,1 +1,58 @@
-<p>{{auctionName}}</p>
+<div class="right-align">
+  <button mat-mini-fab (click)=" goToProfile()" aria-label="Example icon button with a home icon">
+    <mat-icon>home</mat-icon>
+  </button>
+</div>
+<div class="right-align">
+  <button mat-mini-fab color="primary" (click)=" goToDashboard()" aria-label="Example icon button with a menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+</div>
+<br>
+<div>
+  <mat-toolbar color="primary" class="centered-toolbar">
+    Auction End Time
+  </mat-toolbar>
+
+  <mat-toolbar *ngIf="currentAuction" color="primary" class="centered-toolbar">
+    {{currentAuction?.endTime | date: 'yyyy-MM-dd HH:mm:ss' }}
+  </mat-toolbar>
+  <mat-toolbar *ngIf="currentAuction" color="primary" class="centered-toolbar">
+    {{currentAuction.auctionName}}
+  </mat-toolbar>
+
+  <mat-toolbar *ngIf="timeOver" color="primary" class="centered-toolbar">
+    Auction is Over!
+  </mat-toolbar>
+
+</div>
+<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+  <!-- Sol taraf: Resim ve açıklama -->
+  <div fxFlex="50">
+    <img [src]="safeImageUrl" alt="Auction Image" style="max-width: 100%;">
+    <p *ngIf="currentAuction">Item Description : {{ currentAuction.auctionDescription }}</p>
+    <p *ngIf="currentAuction">Item Starting Price : {{ currentAuction.lastPrice }}</p>
+    <p *ngIf="currentAuction">Active Last Bid For Item : {{ currentAuction.startPrice }}</p>
+    <mat-form-field>
+      <mat-label>Your UserName</mat-label>
+      <input matInput #txtYourUserName>
+    </mat-form-field>
+
+  </div>
+
+  <!-- Sağ taraf: Text area -->
+  <div fxFlex="50">
+    <mat-form-field>
+      <mat-label>Your Bid</mat-label>
+      <input matInput #txtYourBid>
+    </mat-form-field>
+    <button *ngIf="!timeOver" mat-raised-button color="primary"
+      (click)="createBid(txtYourUserName,txtYourBid)">Bid!</button>
+  </div>
+</div>
+
+<ul>
+  <li *ngFor="let bid of bids">Last Bid : {{ bid }}</li>
+</ul>
+
+<button *ngIf="userInfo.isSeller" mat-raised-button color="primary" (click)="moneyTransfer()">Money Transfer</button>

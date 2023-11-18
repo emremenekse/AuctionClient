@@ -1,3 +1,13 @@
+<div class="right-align">
+  <button mat-mini-fab (click)=" goToProfile()" aria-label="Example icon button with a home icon">
+    <mat-icon>home</mat-icon>
+  </button>
+</div>
+<div class="right-align">
+  <button mat-mini-fab color="primary" (click)=" goToDashboard()" aria-label="Example icon button with a menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+</div>
 <mat-toolbar color="primary" class="centered-toolbar">
   All Auctions
 </mat-toolbar>
@@ -5,7 +15,7 @@
 
 <mat-grid-list cols="1" rowHeight="50px">
   <mat-grid-tile *ngFor="let auction of auctions">
-    <mat-card [class.disabled]="auction.isCompleted" (click)=" !auction.isCompleted &&
+    <mat-card (click)=" 
       goToAuctionDetail(auction.auctionName)">
       {{ auction.auctionName }}
     </mat-card>
@@ -40,8 +50,25 @@
     </mat-form-field>
   </div>
   <br>
+  <div>
+    <mat-form-field>
+      <mat-label>Auction Description</mat-label>
+      <input matInput #txtDescription>
+    </mat-form-field>
+  </div>
   <br>
-  <div><button mat-mini-fab (click)="createAuction(txtProductName,txtproviderUserName,txtAuctionName,txtStartPrice)"
+  <div>
+
+    <mat-label>Photo</mat-label>
+    <input type="file" (change)="handleFileInput($event)" #fileInput>
+
+  </div>
+
+
+  <br>
+  <br>
+  <div><button mat-mini-fab
+      (click)="createAuction(txtProductName,txtproviderUserName,txtAuctionName,txtStartPrice,txtDescription)"
       color="accent" aria-label="Example icon button with a plus one icon">
       <mat-icon>plus_one</mat-icon>
     </button>

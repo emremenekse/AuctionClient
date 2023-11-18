@@ -24,7 +24,6 @@ export class DashboardComponent implements OnInit {
     ngOnInit(){ 
       this.userInfo = this.authService.getUserData();
       if (this.userInfo) {
-      // userInfo içinde isAdmin özelliğini kontrol et
       this.showButton = this.userInfo.isAdmin;
       this.getOrganization();
     }
@@ -33,6 +32,10 @@ export class DashboardComponent implements OnInit {
     goToProfile(): void {
       this.router.navigate(['/profile']);
     }
+
+  goToDashboard(): void {
+    this.router.navigate(['/dashboard']);
+  }
     async goToDetails(organizationName: string): Promise<any> {
     await this.router.navigate(['/auction'], { queryParams: { name: organizationName } });
 }
@@ -50,24 +53,18 @@ export class DashboardComponent implements OnInit {
     user_entity.adminUserName = adminUserName.value;  
     this.orgService.createOrganization(user_entity).subscribe({
   next: (result) => {
-    // Başarılı giriş işlemi
     this.getOrganization();
   },
   error: (error) => {
-    // Hata mesajını güvenli bir şekilde yakalayıp gösterme
     let errorMessage = "An unexpected error occurred.";
     if (error instanceof HttpErrorResponse) {
-      // Backend hata döndürdü, hata mesajını kontrol et
       errorMessage = error.error.message || "Invalid username or password.";
     } else if (error.error instanceof ErrorEvent) {
-      // Client-side veya network hatası oluştu
       errorMessage = `An error occurred: ${error.error.message}`;
     } else {
-      // Diğer türden bir hata oluştu
       errorMessage = error.message || String(error);
     }
 
-    // Alertify ile hata mesajını göster
     this.alertify.message(errorMessage, {
       dismissOthers: true,
       messageType: MessageType.Error,

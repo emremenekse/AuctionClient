@@ -31,24 +31,18 @@ export class ForgetPassComponent {
   this.userService.create(user_entity).subscribe({
   next: (result) => {
     this.authService.storeUserData(result);
-    // Başarılı giriş işlemi
     this.router.navigate(['/dashboard']);
   },
   error: (error) => {
-    // Hata mesajını güvenli bir şekilde yakalayıp gösterme
     let errorMessage = "An unexpected error occurred.";
     if (error instanceof HttpErrorResponse) {
-      // Backend hata döndürdü, hata mesajını kontrol et
       errorMessage = error.error.message || "Invalid username or password.";
     } else if (error.error instanceof ErrorEvent) {
-      // Client-side veya network hatası oluştu
       errorMessage = `An error occurred: ${error.error.message}`;
     } else {
-      // Diğer türden bir hata oluştu
       errorMessage = error.message || String(error);
     }
 
-    // Alertify ile hata mesajını göster
     this.alertify.message(errorMessage, {
       dismissOthers: true,
       messageType: MessageType.Error,

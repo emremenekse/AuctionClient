@@ -1,14 +1,51 @@
+<div class="right-align">
+  <button mat-mini-fab (click)=" goToProfile()" aria-label="Example icon button with a home icon">
+    <mat-icon>home</mat-icon>
+  </button>
+</div>
+<div class="right-align">
+  <button mat-mini-fab color="primary" (click)=" goToDashboard()" aria-label="Example icon button with a menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+</div>
 <mat-toolbar color="primary" class="centered-toolbar">
   Won Auctions
 </mat-toolbar>
 
 <br>
-<div *ngIf="">
+<div *ngIf="true">
   <mat-grid-list cols="1" rowHeight="50px">
     <mat-grid-tile *ngFor="let auction of auctions">
       <mat-card [class.disabled]="auction.isCompleted">
-        {{ auction.name }}
+        {{ auction.auctionName }}
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
+</div>
+
+
+<mat-toolbar color="primary" class="centered-toolbar">
+  Personal Balance : {{ activeUserInfo.balance }}
+</mat-toolbar>
+<br>
+
+<div>
+  <mat-form-field>
+    <mat-label>Addind Balance Amount</mat-label>
+    <input matInput #txtAmount>
+  </mat-form-field>
+</div>
+<mat-form-field>
+  <mat-label>Password</mat-label>
+  <input matInput #txtNewPassword [type]="hide ? 'password' : 'text'">
+  <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+    [attr.aria-pressed]="hide">
+    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </button>
+</mat-form-field>
+
+<div><button mat-mini-fab (click)="balanceAdd(txtAmount,txtNewPassword)" color="accent"
+    aria-label="Example icon button with a plus one icon">
+    <mat-icon>open_in_new</mat-icon>
+  </button>
 </div>

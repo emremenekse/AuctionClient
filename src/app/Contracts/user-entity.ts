@@ -3,10 +3,10 @@ export class UserEntity {
   firstName?: string;
   lastName?: string;
   email?: string;
-  password?: string; // Şifre asla istemci tarafına açık metin olarak gönderilmemeli
+  password?: string; 
   phoneNumber?: string;
   username?: string;
-  balance?: number; // TypeScript'te decimal yerine number kullanılır
+  balance?: number; 
   isSeller?: boolean;
   isNewUser?: boolean;
 }
